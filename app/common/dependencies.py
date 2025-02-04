@@ -1,7 +1,7 @@
 """This module contains common dependencies used in the application"""
 
 from app.common.types import PaginationParams
-from app.config.database import SessionLocal
+from app.core.database import SessionLocal
 
 
 def get_db():
