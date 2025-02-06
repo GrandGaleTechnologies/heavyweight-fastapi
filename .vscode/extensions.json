@@ -1,7 +1,11 @@
 {
     "recommendations": [
-        "ms-python.black-formatter",
         "njpwerner.autodocstring",
-        "ms-python.pylint"
+        "donjayamanne.python-environment-manager",
+        "ms-python.flake8",
+        "ms-python.vscode-pylance",
+        "ms-python.pylint",
+        "ms-python.python",
+        "charliermarsh.ruff"
     ]
 }
