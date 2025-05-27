@@ -1,12 +1,15 @@
 """This module contains the security functions for the application."""
 
-from jose import jwt
-from passlib.context import CryptContext
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
+import jwt
+from datetime import datetime, timedelta
+from app.core.settings import get_settings
 
-from app.config.settings import get_settings
-
-
+ph = PasswordHasher()
 settings = get_settings()
+
+HASHING_ALGORITHM = "HS256"
 
 
 def hash_password(raw: str) -> str:
@@ -18,8 +21,7 @@ def hash_password(raw: str) -> str:
     Returns:
         str: The hashed password
     """
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    return pwd_context.hash(raw)
+    return ph.hash(raw)
 
 
 def verify_password(plain_password: str, hashed_password: str):
@@ -32,11 +34,16 @@ def verify_password(plain_password: str, hashed_password: str):
     Returns:
         bool: True if the password is correct, False otherwise
     """
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-    return pwd_context.verify(plain_password, hashed_password)
+    try:
+        return ph.verify(hash=str(hashed_password), password=plain_password)
+    except VerifyMismatchError:
+        return False
 
 
-def create_access_token(data: dict):
+def create_access_token(
+        data: dict,
+        expires_delta: timedelta = timedelta(minutes=60),
+):
     """This function creates a JWT token
 
     Args:
@@ -45,6 +52,8 @@ def create_access_token(data: dict):
     Returns:
         str: The JWT token
     """
-    return jwt.encode(
-        claims=data, key=settings.SECRET_KEY, algorithm=settings.HASHING_ALGORITHM
-    )
+    to_encode = data.copy()
+    expire = datetime.utcnow() + expires_delta
+    to_encode.update({"exp": expire})
+
+    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=HASHING_ALGORITHM) # noqa

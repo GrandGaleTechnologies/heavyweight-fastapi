@@ -5,6 +5,9 @@ from pydantic import BaseModel, Field
 from app.common.schemas import PaginationSchema, ResponseSchema
 
 
+######################################################################
+# Name
+######################################################################
 class Name(BaseModel):
     """The base schema for the name model."""
 

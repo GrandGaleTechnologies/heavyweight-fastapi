@@ -3,7 +3,7 @@
 from typing import NamedTuple
 
 
-class PaginationParams(NamedTuple):
+class PaginationParamsType(NamedTuple):
     """The pagination parameters for the application."""
 
     page: int
