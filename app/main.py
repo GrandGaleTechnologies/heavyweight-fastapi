@@ -37,7 +37,7 @@ app = FastAPI(
     title="Heavyweight FastAPI",
     lifespan=lifespan,
     default_response_class=ORJSONResponse,
-    docs_url="/" if settings.DEBUG else None,
+    docs_url="/",
     contact={
         "name": "GrandGale Technologies",
         "url": "https://github.com/GrandGaleTechnologies",
