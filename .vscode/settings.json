@@ -1,6 +1,7 @@
 {
     "[python]": {
-        "editor.defaultFormatter": "charliermarsh.ruff"
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.insertSpaces": true
     },
     "pylint.args": ["--load-plugins", "pylint_pydantic"],
     "python.testing.pytestArgs": [
