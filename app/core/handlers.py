@@ -19,13 +19,7 @@ async def base_exception_handler(_: Request, exc: Exception):
     Exception handler for general Exception
     """
     # Send email to staff
-    if settings.DEBUG:
-        print(exc)
-    else:
-        # Send email to staff
-        # sendgrid.send_email()
-        ...
-
+    print(exc)
     return ORJSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content=jsonable_encoder(
@@ -63,13 +57,7 @@ async def internal_server_error_exception_handler(_: Request, exc: InternalServe
     Exception handler for 'InternalServerError' exception
     """
     # Send email to staff
-    if settings.DEBUG:
-        print(exc)
-    else:
-        # Send staff a notice
-        # sendgrid.send_email()
-        ...
-
+    print(exc)
     return ORJSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         content=jsonable_encoder(
@@ -86,12 +74,7 @@ async def bad_gateway_error_exception_handler(_: Request, exc: BadGatewayError):
     """
     Exception handler for 'BadGatewayError' exception
     """
-    if settings.DEBUG:
-        print(exc)
-    else:
-        # Send email to staff
-        # sendgrid.send_email()
-        ...
+    print(exc)
 
     return ORJSONResponse(
         status_code=status.HTTP_502_BAD_GATEWAY,

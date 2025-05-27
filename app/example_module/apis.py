@@ -1,9 +1,8 @@
 """This module contains the API endpoints for the example module."""
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter
 
-from app.common.dependencies import pagination_params
-from app.common.types import PaginationParams
+from app.common.annotations import PaginationParams
 from app.example_module import schemas
 
 router = APIRouter()
@@ -29,9 +28,17 @@ NAMES = [
 ]
 
 
-@router.get("", summary="Example Endpoint", response_model=schemas.NameResponse)
-async def example_endpoint(pagination: PaginationParams = Depends(pagination_params)):
-    """This is an example endpoint"""
+@router.get(
+    "",
+    summary="Example Endpoint",
+    response_description="The paginated list of names",
+    status_code=200,
+    response_model=schemas.NameResponse,
+)
+async def route_example_endpoint(pagination: PaginationParams):
+    """
+    This is an example endpoint
+    """
     page = pagination.page
     size = pagination.size
 
