@@ -1,14 +1,18 @@
 """This module contains the security functions for the application."""
 
+from datetime import datetime, timedelta
+
+import jwt
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
-import jwt
-from datetime import datetime, timedelta
+
 from app.core.settings import get_settings
 
+# Globals
 ph = PasswordHasher()
 settings = get_settings()
 
+# Constants
 HASHING_ALGORITHM = "HS256"
 
 
@@ -41,8 +45,8 @@ def verify_password(plain_password: str, hashed_password: str):
 
 
 def create_access_token(
-        data: dict,
-        expires_delta: timedelta = timedelta(minutes=60),
+    data: dict,
+    expires_delta: timedelta = timedelta(minutes=60),
 ):
     """This function creates a JWT token
 
@@ -56,4 +60,4 @@ def create_access_token(
     expire = datetime.now() + expires_delta
     to_encode.update({"exp": expire})
 
-    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=HASHING_ALGORITHM) # noqa
+    return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=HASHING_ALGORITHM)  # noqa
