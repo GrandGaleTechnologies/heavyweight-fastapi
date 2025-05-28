@@ -53,7 +53,7 @@ def create_access_token(
         str: The JWT token
     """
     to_encode = data.copy()
-    expire = datetime.utcnow() + expires_delta
+    expire = datetime.now() + expires_delta
     to_encode.update({"exp": expire})
 
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=HASHING_ALGORITHM) # noqa
