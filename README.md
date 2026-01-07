@@ -105,6 +105,23 @@ start.sh
    alembic upgrade head
    ```
 
+  ## Alembic config & slug naming (short)
+  The project uses an Alembic config that generates revision filenames from a short "slug". Use concise, structured slugs when creating revisions:
+
+  Strategy: [Index]_[Action]_[Target]
+
+  Example:
+  ```bash
+  alembic revision --autogenerate -m "1_ct_users"
+  ```
+
+  Naming cheat sheet (Action prefixes):
+  - ct — Create Table (1_ct_users)
+  - ac — Add Column (2_ac_email_to_users)
+  - dt — Drop Table (3_dt_old_logs)
+  - rc — Rename Column (4_rc_name_to_fullname)
+  - ai — Add Index (5_ai_idx_user_email)
+
 </br>
 
 5. Start the application in development mode:
