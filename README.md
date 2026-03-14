@@ -83,12 +83,15 @@ start.sh
    NOTE: If you are using VsCode and you see a popup that says use env as workspace env then click yes
 
 </br>
-2. Install dependencies:
-   Locally
+2. Install dependencies
 
-   ```shell
-   $ pip install -r requirements.txt
-   ```
+#### Using `uv` (recommended)
+
+```bash
+# Optional: add uvloop 
+uv add uvloop
+uv venv
+```
 </br>
     With Docker
    
