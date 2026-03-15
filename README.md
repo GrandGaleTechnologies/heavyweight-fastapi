@@ -89,6 +89,11 @@ start.sh
 
 ```bash
 # Optional: add uvloop 
+uv add uvloop
+
+uv venv
+
+# Optional: add uvloop 
 # Install dependencies from the lock file  
 uv sync  
 
@@ -96,7 +101,7 @@ uv sync
 uv pip install uvloop  
 ```
 </br>
-    With Docker
+    With Docker 
    
    ```shell
    docker-compose up
